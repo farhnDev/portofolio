@@ -20,6 +20,26 @@
     {{-- ini css devicon --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
+    <style>
+        /* Ikon default tanpa warna */
+        .dev-icons .list-inline-item i.plain {
+
+            /* Ganti dengan warna default yang Anda inginkan */
+            transition: color 0.1s ease;
+            /* Efek transisi ketika berubah warna */
+            cursor: pointer;
+            /* Mengubah kursor menjadi pointer saat dihover */
+        }
+
+        /* Ikon berwarna saat dihover */
+        .dev-icons .list-inline-item i.colored {
+            /* Ganti dengan warna yang Anda inginkan saat dihover */
+            transition: color 0.1s ease;
+            /* Efek transisi ketika berubah warna */
+            cursor: pointer;
+            /* Mengubah kursor menjadi pointer saat dihover */
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -169,13 +189,22 @@
             <div class="resume-section-content">
                 <h2 class="mb-5">Skills</h2>
                 <div class="subheading mb-3">Programming Languages & Tools</div>
-                <ul class="list-inline dev-icons">
+                {{-- <ul class="list-inline dev-icons">
                     @foreach (explode(', ', get_meta_value('_language')) as $item)
                         <li class="list-inline-item">
                             <i class="devicon-{{ strtolower($item) }}-plain"></i>
                         </li>
                     @endforeach
+                </ul> 
+                ** ini syntax awal --}}
+                <ul class="list-inline dev-icons">
+                    @foreach (explode(', ', get_meta_value('_language')) as $item)
+                        <li class="list-inline-item">
+                            <i class="devicon-{{ strtolower($item) }}-plain plain"></i>
+                        </li>
+                    @endforeach
                 </ul>
+
                 <div class="subheading mb-3">Workflow</div>
                 {!! set_list_workflow(get_meta_value('_workflow')) !!}
             </div>
@@ -203,6 +232,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="{{ asset('interface') }}/js/scripts.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // function changeIconColor(icon, hover) {
+        //     var iconName = icon.className.split(' ')[0]; // Mengambil nama kelas ikon
+        //     var newClassName = hover ? iconName + ' colored' : iconName +
+        //         ' plain'; // Menyesuaikan kelas sesuai kondisi hover
+        //     icon.className = newClassName;
+        // }
+        $(document).ready(function() {
+            $(".dev-icons .list-inline-item i.plain").hover(
+                function() {
+                    $(this).removeClass("plain").addClass("colored");
+                },
+                function() {
+                    $(this).removeClass("colored").addClass("plain");
+                }
+            );
+        });
+    </script>
+
+    </script>
 </body>
 
 </html>
